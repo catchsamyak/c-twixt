@@ -41,10 +41,12 @@ void printboard(int board[47][47]){
             else{ 
                 if(i%2==0){
                     if(board[i][j]==5){
-                        printf("\033[31m  ·  \033[0m");
+                        //change char here
+                        printf("\033[31m  *  \033[0m");
                     }
                     else if(board[i][j]==-5){
-                        printf("\033[34m  ·  \033[0m");
+                        //change char here
+                        printf("\033[34m  *  \033[0m");
                     }
                     else if(j==1 || j==45){
                         printf("\033[31m─────\033[0m");
@@ -56,10 +58,12 @@ void printboard(int board[47][47]){
                 }
                 else{
                     if(board[i][j]==5){
-                        printf("\033[31m·\033[0m");
+                        //change char here
+                        printf("\033[31m*\033[0m");
                     }
                     else if(board[i][j]==-5){
-                        printf("\033[34m·\033[0m");
+                        //change char here
+                        printf("\033[34m*\033[0m");
                     }
                     else if(i==1 || i==45){
                         printf("\033[34m│\033[0m");
@@ -77,5 +81,4 @@ void printboard(int board[47][47]){
         }
         printf("\n");
     }
-    printf("\n");
 }

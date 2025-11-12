@@ -1,26 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "link.h"
+#include "logic.h"
 
-linkgroup* addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp){
-    link* new = malloc(sizeof(link));
-    new->p1.x=x1;
-    new->p1.y=y1;
-    new->p2.x=x2;
-    new->p2.y=y2;
-    (grp->n)++;
-    grp->links = realloc(grp->links,(grp->n)*sizeof(link*));
-    grp->links[(grp->n-1)] = new;
-    return grp->links;
-}
+void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redsimp, linkgroup* blusimp){
 
-linkgroup* addlinktosimpgrp(int x1, int y1, int x2, int y2, linkgroup* grp){
-    //to be done
-    //add the link and simplify the grp
-    //later as part of the logic, we will check if there is a link in this grp such that the x1-x2=23*2
-}
+    if(x1<0 || x1>46 || y1<0 || y1>46 || x2<0 || x2>46 || y2<0 || y2>46){
+        printf("trying to link out of bound\n");
+        return;
+    }
 
-void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red, linkgroup* blu, linkgroup* redsimp, linkgroup* blusimp){
     //if both pegs are red
     if(board[x1][y1]==1 && board[x2][y2]==1){
         if((x2)-(x1)==2 && (y2)-(y1)==4){
@@ -49,8 +38,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                red->links=addlinktogrp(x1,y1,x2,y2,red);
-                redsimp->links=addlinktosimpgrp(x1,y1,x2,y2,redsimp);
+                addlinktosimpgrp(x1,y1,x2,y2,redsimp);
             }
         }
         else if((x2)-(x1)==-2 && (y2)-(y1)==4){
@@ -79,8 +67,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                red->links=addlinktogrp(x1,y1,x2,y2,red);
-                redsimp->links=addlinktosimpgrp(x1,y1,x2,y2,redsimp);
+                addlinktosimpgrp(x1,y1,x2,y2,redsimp);
             }
         }
         else if((x2)-(x1)==2 && (y2)-(y1)==-4){
@@ -109,8 +96,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                red->links=addlinktogrp(x1,y1,x2,y2,red);
-                redsimp->links=addlinktosimpgrp(x1,y1,x2,y2,redsimp);
+                addlinktosimpgrp(x1,y1,x2,y2,redsimp);
             }
         }
         else if((x2)-(x1)==-2 && (y2)-(y1)==-4){
@@ -139,8 +125,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                red->links=addlinktogrp(x1,y1,x2,y2,red);
-                redsimp->links=addlinktosimpgrp(x1,y1,x2,y2,redsimp);
+                addlinktosimpgrp(x1,y1,x2,y2,redsimp);
             }
         }
         else if((x2)-(x1)==4 && (y2)-(y1)==2){
@@ -169,8 +154,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                red->links=addlinktogrp(x1,y1,x2,y2,red);
-                redsimp->links=addlinktosimpgrp(x1,y1,x2,y2,redsimp);
+                addlinktosimpgrp(x1,y1,x2,y2,redsimp);
             }
         }
         else if((x2)-(x1)==-4 && (y2)-(y1)==2){
@@ -199,8 +183,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                red->links=addlinktogrp(x1,y1,x2,y2,red);
-                redsimp->links=addlinktosimpgrp(x1,y1,x2,y2,redsimp);
+                addlinktosimpgrp(x1,y1,x2,y2,redsimp);
             }
         }
         else if((x2)-(x1)==4 && (y2)-(y1)==-2){
@@ -229,8 +212,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                red->links=addlinktogrp(x1,y1,x2,y2,red);
-                redsimp->links=addlinktosimpgrp(x1,y1,x2,y2,redsimp);
+                addlinktosimpgrp(x1,y1,x2,y2,redsimp);
             }
         }
         else if((x2)-(x1)==-4 && (y2)-(y1)==-2){
@@ -259,8 +241,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                red->links=addlinktogrp(x1,y1,x2,y2,red);
-                redsimp->links=addlinktosimpgrp(x1,y1,x2,y2,redsimp);
+                addlinktosimpgrp(x1,y1,x2,y2,redsimp);
             }
         }
     }
@@ -293,8 +274,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                blu->links=addlinktogrp(x1,y1,x2,y2,blu);
-                blusimp->links=addlinktosimpgrp(x1,y1,x2,y2,blusimp);
+                addlinktosimpgrp(x1,y1,x2,y2,blusimp);
             }
         }
         else if((x2)-(x1)==-2 && (y2)-(y1)==4){
@@ -323,8 +303,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                blu->links=addlinktogrp(x1,y1,x2,y2,blu);
-                blusimp->links=addlinktosimpgrp(x1,y1,x2,y2,blusimp);
+                addlinktosimpgrp(x1,y1,x2,y2,blusimp);
             }
         }
         else if((x2)-(x1)==2 && (y2)-(y1)==-4){
@@ -353,8 +332,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                blu->links=addlinktogrp(x1,y1,x2,y2,blu);
-                blusimp->links=addlinktosimpgrp(x1,y1,x2,y2,blusimp);
+                addlinktosimpgrp(x1,y1,x2,y2,blusimp);
             }
         }
         else if((x2)-(x1)==-2 && (y2)-(y1)==-4){
@@ -383,8 +361,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                blu->links=addlinktogrp(x1,y1,x2,y2,blu);
-                blusimp->links=addlinktosimpgrp(x1,y1,x2,y2,blusimp);
+                addlinktosimpgrp(x1,y1,x2,y2,blusimp);
             }
         }
         else if((x2)-(x1)==4 && (y2)-(y1)==2){
@@ -413,8 +390,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                blu->links=addlinktogrp(x1,y1,x2,y2,blu);
-                blusimp->links=addlinktosimpgrp(x1,y1,x2,y2,blusimp);
+                addlinktosimpgrp(x1,y1,x2,y2,blusimp);
             }
         }
         else if((x2)-(x1)==-4 && (y2)-(y1)==2){
@@ -443,8 +419,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                blu->links=addlinktogrp(x1,y1,x2,y2,blu);
-                blusimp->links=addlinktosimpgrp(x1,y1,x2,y2,blusimp);
+                addlinktosimpgrp(x1,y1,x2,y2,blusimp);
             }
         }
         else if((x2)-(x1)==4 && (y2)-(y1)==-2){
@@ -473,8 +448,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                blu->links=addlinktogrp(x1,y1,x2,y2,blu);
-                blusimp->links=addlinktosimpgrp(x1,y1,x2,y2,blusimp);
+                addlinktosimpgrp(x1,y1,x2,y2,blusimp);
             }
         }
         else if((x2)-(x1)==-4 && (y2)-(y1)==-2){
@@ -503,8 +477,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
             }
             else{
                 //add the link
-                blu->links=addlinktogrp(x1,y1,x2,y2,blu);
-                blusimp->links=addlinktosimpgrp(x1,y1,x2,y2,blusimp);
+                addlinktosimpgrp(x1,y1,x2,y2,blusimp);
             }
         }
     }
@@ -515,17 +488,3 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red,
 
     return;
 }
-
-void unmakelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* red, linkgroup* blu, linkgroup* redsimp, linkgroup* blusimp, int playr){
-    //to be done
-    //check if the link is valid by making sure all of those middle ones are 5/-5 9red/blu)
-    //only red can remove red links check that with playr
-    //similar to above one, just remove the links (make them all zeros) if the input is valid
-    return;
-}
-
-//maybe addlinktogrp and storing all links for red/blu is useless (can be removed by removing function and all the calls)
-//for autolink try all 8 possible positions
-//when someone puts at the end then check if there is full length connection you can group from red/blue links think of combining pairs logic
-
-
