@@ -18,6 +18,7 @@ void addlinktosimpgrp(int x1, int y1, int x2, int y2, linkgroup* simpgrp){
     // grp->links = realloc(grp->links,(grp->n)*sizeof(link*));
     // grp->links[(grp->n-1)] = new;
     // return grp->links;
+    //need to keep original links also, and then add combined ones, if dont add original link then can miss cases
     return;
 }
 

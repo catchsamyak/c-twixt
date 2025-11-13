@@ -4,8 +4,6 @@
 #include "link.h"
 #include "logic.h"
 
-//there is a slight issue in linking, try linking two adjacent Ls from same point 
-
 int main(){
     //1 reps red
     //-1 reps blue
@@ -110,3 +108,7 @@ int main(){
 
     return 0;
 }
+
+//[issues to be solved as part of phase 2]
+//there is a slight issue in linking, try linking two adjacent Ls from same point 
+//if you input letters it goes in infinite loop
