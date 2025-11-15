@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -lm -Wall -Wextra -g
 SRCS = ctwixt.c link.c board.c logic.c
 OBJS = $(SRCS:.c=.o)
 TARGET = twixt

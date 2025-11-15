@@ -12,10 +12,14 @@ typedef struct link{
 }link;
 
 typedef struct linkgroup{
-    link** links;
-    int n;
+    link** singllinks;
+    int nsl;
+    link** comblinks;
+    int ncl;
 }linkgroup;
 
-void addlinktosimpgrp(int x1, int y1, int x2, int y2, linkgroup* grp);
+void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp);
+void checkwin(int playr, int* end, linkgroup* redgrp, linkgroup* blugrp);
+void freeall(linkgroup* redgrp, linkgroup* blugrp);
 
 #endif

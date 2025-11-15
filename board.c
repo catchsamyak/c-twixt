@@ -15,7 +15,7 @@ void printboardvalues(int board[47][47]){
 //-1 is blue
 //5 is red link
 //-5 is blue link
-//• or · 
+//• or · or *
 void printboard(int board[47][47]){
     printf("\n");
     for(int j=0; j<47; j++){
@@ -42,11 +42,11 @@ void printboard(int board[47][47]){
                 if(i%2==0){
                     if(board[i][j]==5){
                         //change char here
-                        printf("\033[31m  *  \033[0m");
+                        printf("\033[31m  •  \033[0m");
                     }
                     else if(board[i][j]==-5){
                         //change char here
-                        printf("\033[34m  *  \033[0m");
+                        printf("\033[34m  •  \033[0m");
                     }
                     else if(j==1 || j==45){
                         printf("\033[31m─────\033[0m");
@@ -59,11 +59,11 @@ void printboard(int board[47][47]){
                 else{
                     if(board[i][j]==5){
                         //change char here
-                        printf("\033[31m*\033[0m");
+                        printf("\033[31m•\033[0m");
                     }
                     else if(board[i][j]==-5){
                         //change char here
-                        printf("\033[34m*\033[0m");
+                        printf("\033[34m•\033[0m");
                     }
                     else if(i==1 || i==45){
                         printf("\033[34m│\033[0m");

@@ -4,44 +4,40 @@
 #include "link.h"
 #include "logic.h"
 
+//[issues]
+//if you input letters it goes in infinite loop
+//the link validation is still not perfect (need to store the middle points of each links and check)
+
 int main(){
-    //1 reps red
-    //-1 reps blue
+    //1 is red
+    //-1 is blue
     int playr = 1;
+
+    //contains if the game should end or not
+    int end = 0;
 
     int board[47][47]={0};
 
-    linkgroup* redsimp = malloc(sizeof(linkgroup));
-    redsimp->n=0;
+    linkgroup* redgrp = malloc(sizeof(linkgroup));
+    redgrp->ncl=0;
+    redgrp->nsl=0;
 
-    linkgroup* blusimp = malloc(sizeof(linkgroup));
-    blusimp->n=0;
+    linkgroup* blugrp = malloc(sizeof(linkgroup));
+    blugrp->ncl=0;
+    blugrp->nsl=0;
 
-    // board[10][10]=1;
-    // board[12][14]=-1;
-    // board[0][10]=1;
-    // board[0][14]=-1;
-    // board[10][0]=1;
-    // board[12][0]=-1;
-    // board[10][46]=1;
-    // board[12][46]=-1;
-    // board[46][10]=1;
-    // board[46][14]=-1;
-    // printboardvalues(board);
-
+    //print initial information like how to play
+    //note- links cannot be removed
     printboard(board);
 
     int ix=0;
     int iy=0;
-    while(ix!=-1 && iy!=-1){
+    while(end!=1){
         if(playr==1){
             int cont=0;
             while(cont!=1){
                 printf("\n\033[31mred: \033[0m");
                 scanf("%d %d",&ix, &iy);
-                if(ix==-1||iy==-1){
-                    break;
-                }
                 int x=2*ix-2;
                 int y=2*iy-2;
                 if(ix<1 || ix>24 || iy<1 || iy>24){
@@ -55,15 +51,19 @@ int main(){
                 }
                 else{
                     board[x][y]=1;
-                    makelink(board,x,y,x+2,y+4,redsimp,blusimp);
-                    makelink(board,x,y,x-2,y+4,redsimp,blusimp);
-                    makelink(board,x,y,x+2,y-4,redsimp,blusimp);
-                    makelink(board,x,y,x-2,y-4,redsimp,blusimp);
-                    makelink(board,x,y,x+4,y+2,redsimp,blusimp);
-                    makelink(board,x,y,x-4,y+2,redsimp,blusimp);
-                    makelink(board,x,y,x+4,y-2,redsimp,blusimp);
-                    makelink(board,x,y,x-4,y-2,redsimp,blusimp);
+                    makelink(board,x,y,x+2,y+4,redgrp,blugrp);
+                    makelink(board,x,y,x-2,y+4,redgrp,blugrp);
+                    makelink(board,x,y,x+2,y-4,redgrp,blugrp);
+                    makelink(board,x,y,x-2,y-4,redgrp,blugrp);
+                    makelink(board,x,y,x+4,y+2,redgrp,blugrp);
+                    makelink(board,x,y,x-4,y+2,redgrp,blugrp);
+                    makelink(board,x,y,x+4,y-2,redgrp,blugrp);
+                    makelink(board,x,y,x-4,y-2,redgrp,blugrp);
                     printboard(board);
+                    //a connection in the middle can also get a win
+                    // if(iy==24||iy==1){
+                    checkwin(playr, &end, redgrp, blugrp);
+                    // }
                     cont=1;
                 }
             }
@@ -74,9 +74,6 @@ int main(){
             while(cont!=1){
                 printf("\n\033[34mblue: \033[0m");
                 scanf("%d %d",&ix, &iy);
-                if(ix==-1||iy==-1){
-                    break;
-                }
                 int x=2*ix-2;
                 int y=2*iy-2;
                 if(ix<1 || ix>24 || iy<1 || iy>24){
@@ -90,15 +87,18 @@ int main(){
                 }
                 else{
                     board[x][y]=-1;
-                    makelink(board,x,y,x+2,y+4,redsimp,blusimp);
-                    makelink(board,x,y,x-2,y+4,redsimp,blusimp);
-                    makelink(board,x,y,x+2,y-4,redsimp,blusimp);
-                    makelink(board,x,y,x-2,y-4,redsimp,blusimp);
-                    makelink(board,x,y,x+4,y+2,redsimp,blusimp);
-                    makelink(board,x,y,x-4,y+2,redsimp,blusimp);
-                    makelink(board,x,y,x+4,y-2,redsimp,blusimp);
-                    makelink(board,x,y,x-4,y-2,redsimp,blusimp);
+                    makelink(board,x,y,x+2,y+4,redgrp,blugrp);
+                    makelink(board,x,y,x-2,y+4,redgrp,blugrp);
+                    makelink(board,x,y,x+2,y-4,redgrp,blugrp);
+                    makelink(board,x,y,x-2,y-4,redgrp,blugrp);
+                    makelink(board,x,y,x+4,y+2,redgrp,blugrp);
+                    makelink(board,x,y,x-4,y+2,redgrp,blugrp);
+                    makelink(board,x,y,x+4,y-2,redgrp,blugrp);
+                    makelink(board,x,y,x-4,y-2,redgrp,blugrp);
                     printboard(board);
+                    // if(ix==24||ix==1){
+                    checkwin(playr, &end, redgrp, blugrp);
+                    // }
                     cont=1;
                 }
             }
@@ -106,9 +106,17 @@ int main(){
         }
     }
 
+    //verify if this is right
+    if(playr==-1){
+        printf("\n\n\033[31mred wins!\033[0m\n");
+    }
+    else{
+        printf("\n\n\033[34mblue wins!\033[0m\n");
+    }
+
+    printf("thanks for playing!\n");
+
+    freeall(redgrp, blugrp);
+
     return 0;
 }
-
-//[issues to be solved as part of phase 2]
-//there is a slight issue in linking, try linking two adjacent Ls from same point 
-//if you input letters it goes in infinite loop
