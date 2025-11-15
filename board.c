@@ -18,7 +18,33 @@ void printboardvalues(int board[47][47]){
 //• or · or *
 void printboard(int board[47][47]){
     printf("\n");
+
+    printf("   ");
+    for(int i=1; i<=24; i++){
+        if(i<10){
+            printf("    %d ", i);
+        }
+        else{
+            printf("   %d ", i);
+        }
+    }
+    printf("\n");
+    printf("\n");
+
     for(int j=0; j<47; j++){
+
+        if(j%2==0){
+            if((j+2)/2<10){
+               printf(" %d   ", (j+2)/2); 
+            }
+            else{
+                printf("%d   ", (j+2)/2);
+            }
+        }
+        else{
+            printf("     ");
+        }
+
         for(int i=0; i<47; i++){
             //corners are always empty
             if((i==0 && j==0) || (i==46 && j==0) || (i==0 && j==46) || (i==46 && j==46)){

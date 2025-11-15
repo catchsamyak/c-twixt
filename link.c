@@ -34,20 +34,27 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
             if(flag && board[cx][(y1)+flagn]==5){
                 //check for exception cases
                 //need to add extra condition in above if condition to differentiate cases where its own link intersection and other link intersection
-                    for(int i=0; i<redgrp->nsl; i++){
-                        if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<redgrp->nsl; i++){
+                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(redgrp->singllinks[i]->middle[j].x==cx && redgrp->singllinks[i]->middle[j].y==(y1)+flagn){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[cx][(y1)+j]=5;
+                    board[cx][(y1)+j]=5;
+                    arr[j].x=cx;
+                    arr[j].y=(y1)+j;
                 }
                 //add the link
-                addlinktogrp(x1,y1,x2,y2,redgrp);
+                addlinktogrp(x1,y1,x2,y2,redgrp,arr);
             }
         }
 
@@ -64,19 +71,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[cx][(y1)+flagn]==5){
-                    for(int i=0; i<redgrp->nsl; i++){
-                        if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<redgrp->nsl; i++){
+                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(redgrp->singllinks[i]->middle[j].x==cx && redgrp->singllinks[i]->middle[j].y==(y1)+flagn){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[cx][(y1)+j]=5;
+                    board[cx][(y1)+j]=5;
+                    arr[j].x=cx;
+                    arr[j].y=(y1)+j;
                 }
-                addlinktogrp(x1,y1,x2,y2,redgrp);
+                addlinktogrp(x1,y1,x2,y2,redgrp,arr);
             }
         }
 
@@ -93,19 +107,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[cx][(y1)-flagn]==5){
-                    for(int i=0; i<redgrp->nsl; i++){
-                        if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<redgrp->nsl; i++){
+                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(redgrp->singllinks[i]->middle[j].x==cx && redgrp->singllinks[i]->middle[j].y==(y1)-flagn){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[cx][(y1)-j]=5;
+                    board[cx][(y1)-j]=5;
+                    arr[j].x=cx;
+                    arr[j].y=(y1)-j;
                 }
-                addlinktogrp(x1,y1,x2,y2,redgrp);
+                addlinktogrp(x1,y1,x2,y2,redgrp,arr);
             }
         }
 
@@ -122,19 +143,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[cx][(y1)-flagn]==5){
-                    for(int i=0; i<redgrp->nsl; i++){
-                        if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<redgrp->nsl; i++){
+                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(redgrp->singllinks[i]->middle[j].x==cx && redgrp->singllinks[i]->middle[j].y==(y1)-flagn){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[cx][(y1)-j]=5;
+                    board[cx][(y1)-j]=5;
+                    arr[j].x=cx;
+                    arr[j].y=(y1)-j;
                 }
-                addlinktogrp(x1,y1,x2,y2,redgrp);
+                addlinktogrp(x1,y1,x2,y2,redgrp,arr);
             }
         }
 
@@ -151,19 +179,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[(x1)+flagn][cy]==5){
-                    for(int i=0; i<redgrp->nsl; i++){
-                        if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<redgrp->nsl; i++){
+                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(redgrp->singllinks[i]->middle[j].x==(x1)+flagn && redgrp->singllinks[i]->middle[j].y==cy){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[(x1)+j][cy]=5;
+                    board[(x1)+j][cy]=5;
+                    arr[j].x=(x1)+j;
+                    arr[j].y=cy;
                 }
-                addlinktogrp(x1,y1,x2,y2,redgrp);
+                addlinktogrp(x1,y1,x2,y2,redgrp,arr);
             }
         }
 
@@ -180,19 +215,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[(x1)-flagn][cy]==5){
-                    for(int i=0; i<redgrp->nsl; i++){
-                        if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<redgrp->nsl; i++){
+                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(redgrp->singllinks[i]->middle[j].x==(x1)-flagn && redgrp->singllinks[i]->middle[j].y==cy){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[(x1)-j][cy]=5;
+                    board[(x1)-j][cy]=5;
+                    arr[j].x=(x1)-j;
+                    arr[j].y=cy;
                 }
-                addlinktogrp(x1,y1,x2,y2,redgrp);
+                addlinktogrp(x1,y1,x2,y2,redgrp,arr);
             }
         }
 
@@ -209,19 +251,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[(x1)+flagn][cy]==5){
-                    for(int i=0; i<redgrp->nsl; i++){
-                        if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<redgrp->nsl; i++){
+                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(redgrp->singllinks[i]->middle[j].x==(x1)+flagn && redgrp->singllinks[i]->middle[j].y==cy){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[(x1)+j][cy]=5;
+                    board[(x1)+j][cy]=5;
+                    arr[j].x=(x1)+j;
+                    arr[j].y=cy;
                 }
-                addlinktogrp(x1,y1,x2,y2,redgrp);
+                addlinktogrp(x1,y1,x2,y2,redgrp,arr);
             }
         }
 
@@ -238,19 +287,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[(x1)-flagn][cy]==5){
-                    for(int i=0; i<redgrp->nsl; i++){
-                        if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<redgrp->nsl; i++){
+                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(redgrp->singllinks[i]->middle[j].x==(x1)-flagn && redgrp->singllinks[i]->middle[j].y==cy){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[(x1)-j][cy]=5;
+                    board[(x1)-j][cy]=5;
+                    arr[j].x=(x1)-j;
+                    arr[j].y=cy;
                 }
-                addlinktogrp(x1,y1,x2,y2,redgrp);
+                addlinktogrp(x1,y1,x2,y2,redgrp,arr);
             }
         }
     }
@@ -273,20 +329,27 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
             if(flag && board[cx][(y1)+flagn]==-5){
                 //check for exception cases
                 //need to add extra condition in above if condition to differentiate cases where its own link intersection and other link intersection
-                    for(int i=0; i<blugrp->nsl; i++){
-                        if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
+                for(int i=0; i<blugrp->nsl; i++){
+                    if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2) || (blugrp->singllinks[i]->p1.x==x1 && blugrp->singllinks[i]->p1.y==y1) || (blugrp->singllinks[i]->p2.x==x1 && blugrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(blugrp->singllinks[i]->middle[j].x==cx && blugrp->singllinks[i]->middle[j].y==(y1)+flagn){
+                                except=1;
+                                break;
+                            }
+                        }
                     }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[cx][(y1)+j]=-5;
+                    board[cx][(y1)+j]=-5;
+                    arr[j].x=cx;
+                    arr[j].y=(y1)+j;
                 }
                 //add the link
-                addlinktogrp(x1,y1,x2,y2,blugrp);
+                addlinktogrp(x1,y1,x2,y2,blugrp,arr);
             }
         }
 
@@ -303,19 +366,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[cx][(y1)+flagn]==-5){
-                    for(int i=0; i<blugrp->nsl; i++){
-                        if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
-                    }      
+                for(int i=0; i<blugrp->nsl; i++){
+                    if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2) || (blugrp->singllinks[i]->p1.x==x1 && blugrp->singllinks[i]->p1.y==y1) || (blugrp->singllinks[i]->p2.x==x1 && blugrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(blugrp->singllinks[i]->middle[j].x==cx && blugrp->singllinks[i]->middle[j].y==(y1)+flagn){
+                                except=1;
+                                break;
+                            }
+                        }
+                    }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[cx][(y1)+j]=-5;
+                    board[cx][(y1)+j]=-5;
+                    arr[j].x=cx;
+                    arr[j].y=(y1)+j;
                 }
-                addlinktogrp(x1,y1,x2,y2,blugrp);
+                addlinktogrp(x1,y1,x2,y2,blugrp,arr);
             }
         }
 
@@ -332,19 +402,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[cx][(y1)-flagn]==-5){
-                    for(int i=0; i<blugrp->nsl; i++){
-                        if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
-                    }      
+                for(int i=0; i<blugrp->nsl; i++){
+                    if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2) || (blugrp->singllinks[i]->p1.x==x1 && blugrp->singllinks[i]->p1.y==y1) || (blugrp->singllinks[i]->p2.x==x1 && blugrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(blugrp->singllinks[i]->middle[j].x==cx && blugrp->singllinks[i]->middle[j].y==(y1)-flagn){
+                                except=1;
+                                break;
+                            }
+                        }
+                    }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[cx][(y1)-j]=-5;
+                    board[cx][(y1)-j]=-5;
+                    arr[j].x=cx;
+                    arr[j].y=(y1)-j;
                 }
-                addlinktogrp(x1,y1,x2,y2,blugrp);
+                addlinktogrp(x1,y1,x2,y2,blugrp,arr);
             }
         }
 
@@ -361,19 +438,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[cx][(y1)-flagn]==-5){
-                    for(int i=0; i<blugrp->nsl; i++){
-                        if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
-                    }      
+                for(int i=0; i<blugrp->nsl; i++){
+                    if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2) || (blugrp->singllinks[i]->p1.x==x1 && blugrp->singllinks[i]->p1.y==y1) || (blugrp->singllinks[i]->p2.x==x1 && blugrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(blugrp->singllinks[i]->middle[j].x==cx && blugrp->singllinks[i]->middle[j].y==(y1)-flagn){
+                                except=1;
+                                break;
+                            }
+                        }
+                    }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[cx][(y1)-j]=-5;
+                    board[cx][(y1)-j]=-5;
+                    arr[j].x=cx;
+                    arr[j].y=(y1)-j;
                 }
-                addlinktogrp(x1,y1,x2,y2,blugrp);
+                addlinktogrp(x1,y1,x2,y2,blugrp,arr);
             }
         }
 
@@ -390,19 +474,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[(x1)+flagn][cy]==-5){
-                    for(int i=0; i<blugrp->nsl; i++){
-                        if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
-                    }      
+                for(int i=0; i<blugrp->nsl; i++){
+                    if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2) || (blugrp->singllinks[i]->p1.x==x1 && blugrp->singllinks[i]->p1.y==y1) || (blugrp->singllinks[i]->p2.x==x1 && blugrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(blugrp->singllinks[i]->middle[j].x==(x1)+flagn && blugrp->singllinks[i]->middle[j].y==cy){
+                                except=1;
+                                break;
+                            }
+                        }
+                    }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[(x1)+j][cy]=-5;
+                    board[(x1)+j][cy]=-5;
+                    arr[j].x=(x1)+j;
+                    arr[j].y=cy;
                 }
-                addlinktogrp(x1,y1,x2,y2,blugrp);
+                addlinktogrp(x1,y1,x2,y2,blugrp,arr);
             }
         }
 
@@ -419,19 +510,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[(x1)-flagn][cy]==-5){
-                    for(int i=0; i<blugrp->nsl; i++){
-                        if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
-                    }      
+                for(int i=0; i<blugrp->nsl; i++){
+                    if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2) || (blugrp->singllinks[i]->p1.x==x1 && blugrp->singllinks[i]->p1.y==y1) || (blugrp->singllinks[i]->p2.x==x1 && blugrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(blugrp->singllinks[i]->middle[j].x==(x1)-flagn && blugrp->singllinks[i]->middle[j].y==cy){
+                                except=1;
+                                break;
+                            }
+                        }
+                    }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[(x1)-j][cy]=-5;
+                    board[(x1)-j][cy]=-5;
+                    arr[j].x=(x1)-j;
+                    arr[j].y=cy;
                 }
-                addlinktogrp(x1,y1,x2,y2,blugrp);
+                addlinktogrp(x1,y1,x2,y2,blugrp,arr);
             }
         }
 
@@ -448,19 +546,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[(x1)+flagn][cy]==-5){
-                    for(int i=0; i<blugrp->nsl; i++){
-                        if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
-                    }      
+                for(int i=0; i<blugrp->nsl; i++){
+                    if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2) || (blugrp->singllinks[i]->p1.x==x1 && blugrp->singllinks[i]->p1.y==y1) || (blugrp->singllinks[i]->p2.x==x1 && blugrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(blugrp->singllinks[i]->middle[j].x==(x1)+flagn && blugrp->singllinks[i]->middle[j].y==cy){
+                                except=1;
+                                break;
+                            }
+                        }
+                    }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[(x1)+j][cy]=-5;
+                    board[(x1)+j][cy]=-5;
+                    arr[j].x=(x1)+j;
+                    arr[j].y=cy;
                 }
-                addlinktogrp(x1,y1,x2,y2,blugrp);
+                addlinktogrp(x1,y1,x2,y2,blugrp,arr);
             }
         }
 
@@ -477,19 +582,26 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             if(flag && board[(x1)-flagn][cy]==-5){
-                    for(int i=0; i<blugrp->nsl; i++){
-                        if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2)){
-                            except=1;
-                            break;
-                        }    
-                    }      
+                for(int i=0; i<blugrp->nsl; i++){
+                    if((blugrp->singllinks[i]->p1.x==x2 && blugrp->singllinks[i]->p1.y==y2) || (blugrp->singllinks[i]->p2.x==x2 && blugrp->singllinks[i]->p2.y==y2) || (blugrp->singllinks[i]->p1.x==x1 && blugrp->singllinks[i]->p1.y==y1) || (blugrp->singllinks[i]->p2.x==x1 && blugrp->singllinks[i]->p2.y==y1)){
+                        for(int j=0; j<=4; j++){
+                            if(blugrp->singllinks[i]->middle[j].x==(x1)-flagn && blugrp->singllinks[i]->middle[j].y==cy){
+                                except=1;
+                                break;
+                            }
+                        }
+                    }    
+                }    
                 if(except){printf("exception: collision allowed\n");} //debug
             }
             if(flag==0 || (flag==1 && except==1)){
+                peg arr[5];
                 for(int j=0; j<=4; j++){
-                        board[(x1)-j][cy]=-5;
+                    board[(x1)-j][cy]=-5;
+                    arr[j].x=(x1)-j;
+                    arr[j].y=cy;
                 }
-                addlinktogrp(x1,y1,x2,y2,blugrp);
+                addlinktogrp(x1,y1,x2,y2,blugrp,arr);
             }
         }
     }

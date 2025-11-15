@@ -6,7 +6,7 @@
 
 //[issues]
 //if you input letters it goes in infinite loop
-//the link validation is still not perfect (need to store the middle points of each links and check)
+//need to check for every intersection -not break at first exception in link collission
 
 int main(){
     //1 is red
@@ -108,13 +108,13 @@ int main(){
 
     //verify if this is right
     if(playr==-1){
-        printf("\n\n\033[31mred wins!\033[0m\n");
+        printf("\n\033[31mred wins!\033[0m\n");
     }
     else{
-        printf("\n\n\033[34mblue wins!\033[0m\n");
+        printf("\n\033[34mblue wins!\033[0m\n");
     }
 
-    printf("thanks for playing!\n");
+    printf("\nthanks for playing!\n");
 
     freeall(redgrp, blugrp);
 

@@ -4,52 +4,59 @@
 #include "link.h"
 #include "logic.h"
 
-void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp){
+void copyarray(peg src[5], peg dest[5]){
+    for(int i=0; i<=4; i++){
+        dest[i]=src[i];
+    }
+    return;
+}
+
+void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp, peg arr[5]){
 
     //checking if can comb with a comb link
     int temp=grp->ncl;
     for(int i=0; i<temp; i++){
         if(grp->comblinks[i]->p1.x==x1 && grp->comblinks[i]->p1.y==y1){
-            link* new = malloc(sizeof(link));
+            comblink* new = malloc(sizeof(comblink));
             new->p1.x=grp->comblinks[i]->p2.x;
             new->p1.y=grp->comblinks[i]->p2.y;
             new->p2.x=x2;
             new->p2.y=y2;
             (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(link*));
+            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
             grp->comblinks[(grp->ncl)-1]=new;
             printf("combined to a comb link\n"); //debug
         }
         else if(grp->comblinks[i]->p1.x==x2 && grp->comblinks[i]->p1.y==y2){
-            link* new = malloc(sizeof(link));
+            comblink* new = malloc(sizeof(comblink));
             new->p1.x=grp->comblinks[i]->p2.x;
             new->p1.y=grp->comblinks[i]->p2.y;
             new->p2.x=x1;
             new->p2.y=y1;
             (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(link*));
+            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
             grp->comblinks[(grp->ncl)-1]=new;
             printf("combined to a comb link\n"); //debug
         }
         else if(grp->comblinks[i]->p2.x==x1 && grp->comblinks[i]->p2.y==y1){
-            link* new = malloc(sizeof(link));
+            comblink* new = malloc(sizeof(comblink));
             new->p1.x=grp->comblinks[i]->p1.x;
             new->p1.y=grp->comblinks[i]->p1.y;
             new->p2.x=x2;
             new->p2.y=y2;
             (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(link*));
+            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
             grp->comblinks[(grp->ncl)-1]=new;
             printf("combined to a comb link\n"); //debug
         }
         else if(grp->comblinks[i]->p2.x==x2 && grp->comblinks[i]->p2.y==y2){
-            link* new = malloc(sizeof(link));
+            comblink* new = malloc(sizeof(comblink));
             new->p1.x=grp->comblinks[i]->p1.x;
             new->p1.y=grp->comblinks[i]->p1.y;
             new->p2.x=x1;
             new->p2.y=y1;
             (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(link*));
+            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
             grp->comblinks[(grp->ncl)-1]=new;
             printf("combined to a comb link\n"); //debug
         }  
@@ -58,46 +65,46 @@ void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp){
     //checking if can comb with a singl link
     for(int i=0; i<grp->nsl; i++){
         if(grp->singllinks[i]->p1.x==x1 && grp->singllinks[i]->p1.y==y1){
-            link* new = malloc(sizeof(link));
+            comblink* new = malloc(sizeof(comblink));
             new->p1.x=grp->singllinks[i]->p2.x;
             new->p1.y=grp->singllinks[i]->p2.y;
             new->p2.x=x2;
             new->p2.y=y2;
             (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(link*));
+            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
             grp->comblinks[(grp->ncl)-1]=new;
             printf("combined to a singl link\n"); //debug
         }
         else if(grp->singllinks[i]->p1.x==x2 && grp->singllinks[i]->p1.y==y2){
-            link* new = malloc(sizeof(link));
+            comblink* new = malloc(sizeof(comblink));
             new->p1.x=grp->singllinks[i]->p2.x;
             new->p1.y=grp->singllinks[i]->p2.y;
             new->p2.x=x1;
             new->p2.y=y1;
             (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(link*));
+            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
             grp->comblinks[(grp->ncl)-1]=new;
             printf("combined to a singl link\n"); //debug
         }
         else if(grp->singllinks[i]->p2.x==x1 && grp->singllinks[i]->p2.y==y1){
-            link* new = malloc(sizeof(link));
+            comblink* new = malloc(sizeof(comblink));
             new->p1.x=grp->singllinks[i]->p1.x;
             new->p1.y=grp->singllinks[i]->p1.y;
             new->p2.x=x2;
             new->p2.y=y2;
             (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(link*));
+            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
             grp->comblinks[(grp->ncl)-1]=new;
             printf("combined to a singl link\n"); //debug
         }
         else if(grp->singllinks[i]->p2.x==x2 && grp->singllinks[i]->p2.y==y2){
-            link* new = malloc(sizeof(link));
+            comblink* new = malloc(sizeof(comblink));
             new->p1.x=grp->singllinks[i]->p1.x;
             new->p1.y=grp->singllinks[i]->p1.y;
             new->p2.x=x1;
             new->p2.y=y1;
             (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(link*));
+            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
             grp->comblinks[(grp->ncl)-1]=new;
             printf("combined to a singl link\n"); //debug
         }   
@@ -105,13 +112,14 @@ void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp){
 
     // need to keep original links also, and then add combined ones, if dont add original link then can miss cases
     //add the link to singl links
-    link* new = malloc(sizeof(link));
+    singllink* new = malloc(sizeof(singllink));
     new->p1.x=x1;
     new->p1.y=y1;
     new->p2.x=x2;
     new->p2.y=y2;
+    copyarray(arr,new->middle);
     (grp->nsl)++;
-    grp->singllinks = realloc(grp->singllinks,(grp->nsl)*sizeof(link*));
+    grp->singllinks = realloc(grp->singllinks,(grp->nsl)*sizeof(singllink*));
     grp->singllinks[(grp->nsl)-1] = new;
     printf("added link to singl links\n");
 
