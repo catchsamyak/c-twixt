@@ -4,7 +4,7 @@
 #include "link.h"
 #include "logic.h"
 
-//[issues]
+//[issues to be fixed in phase 2]
 //if you input letters it goes in infinite loop
 //need to check for every intersection -not break at first exception in link collission
 
@@ -60,10 +60,7 @@ int main(){
                     makelink(board,x,y,x+4,y-2,redgrp,blugrp);
                     makelink(board,x,y,x-4,y-2,redgrp,blugrp);
                     printboard(board);
-                    //a connection in the middle can also get a win
-                    // if(iy==24||iy==1){
                     checkwin(playr, &end, redgrp, blugrp);
-                    // }
                     cont=1;
                 }
             }
@@ -96,9 +93,7 @@ int main(){
                     makelink(board,x,y,x+4,y-2,redgrp,blugrp);
                     makelink(board,x,y,x-4,y-2,redgrp,blugrp);
                     printboard(board);
-                    // if(ix==24||ix==1){
                     checkwin(playr, &end, redgrp, blugrp);
-                    // }
                     cont=1;
                 }
             }
@@ -106,7 +101,6 @@ int main(){
         }
     }
 
-    //verify if this is right
     if(playr==-1){
         printf("\n\033[31mred wins!\033[0m\n");
     }
