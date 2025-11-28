@@ -4,7 +4,9 @@ NAME: Samyak Shah
 ROLL NUMBER: 2025101020  
 
 HOW TO RUN:  
-run the command ./twixt in your linux terminal  
+run the command make  
+then run the command ./twixt  
+in your linux terminal  
 
 HOW TO EXIT:  
 use ctrl+C to exit for now  
