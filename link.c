@@ -883,7 +883,51 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
             //vertical left down link
             printf("case: vld\n"); //debug
             cx = (x1)-1;
-            for(int j=0; j<=4; j++){
+            int first=0;
+            int last=4;
+            for(int d=0; d<=4; d++){
+                int n=2*d-4;
+                if(n==0){
+                    continue;
+                }
+                int cx1=x1;
+                int cy1=y1+n;
+                int cx2=x2;
+                int cy2=y2+n;
+            for(int m=0; m<redgrp->nsl; m++){
+                if(((redgrp->singllinks[m]->p1.x==cx1 && redgrp->singllinks[m]->p1.y==cy1)&&(redgrp->singllinks[m]->p2.x==cx2 && redgrp->singllinks[m]->p2.y==cy2))||((redgrp->singllinks[m]->p2.x==cx1 && redgrp->singllinks[m]->p2.y==cy1)&&(redgrp->singllinks[m]->p1.x==cx2 && redgrp->singllinks[m]->p1.y==cy2))){ 
+                    printf("parallel exception %d found w/ red: allowed.\n",n/2); //debug
+                    if(firstv1[d]>first){
+                        first=firstv1[d];
+                    }
+                    if(lastv1[d]<last){
+                        last=lastv1[d];
+                    }
+                }
+            }
+            }
+            for(int d=0; d<=4; d++){
+                int n=2*d-4;
+                if(n==0){
+                    continue;
+                }
+                int cx1=x1;
+                int cy1=y1+n;
+                int cx2=x2;
+                int cy2=y2+n;
+            for(int m=0; m<blugrp->nsl; m++){
+                if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
+                    printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
+                    if(firstv1[d]>first){
+                        first=firstv1[d];
+                    }
+                    if(lastv1[d]<last){
+                        last=lastv1[d];
+                    }
+                }
+            }
+            }
+            for(int j=first; j<=last; j++){
                 if(board[cx][(y1)+j]!=0){
                     flagn=j;
                     flag=1;
@@ -1353,7 +1397,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 }
             }
             }
-            for(int j=0; j<=4; j++){
+            for(int j=first; j<=last; j++){
                 if(board[(x1)+j][cy]!=0){
                     flagn=j;
                     flag=1;
