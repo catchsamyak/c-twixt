@@ -15,38 +15,103 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
     int except=0;
     int cx;
     int cy;
-
+    int bigflag=0;
+    int firstd[5]={1,3,-1,0,0};
+    int lastd[5]={4,4,-1,1,3};
     //if both pegs are red
     if(board[x1][y1]==1 && board[x2][y2]==1){
         if((x2)-(x1)==2 && (y2)-(y1)==4){
             //vertical right down link
             printf("case: vrd\n"); //debug
             cx = (x1)+1;
-            for(int j=0; j<=4; j++){
+            int first=0;
+            int last=4;
+            for(int d=0; d<=4; d++){
+                int n=2*d-4;
+                if(n==0){
+                    continue;
+                }
+                int cx1=x1;
+                int cy1=y1+n;
+                int cx2=x2;
+                int cy2=y2+n;
+            for(int m=0; m<redgrp->nsl; m++){
+                if(((redgrp->singllinks[m]->p1.x==cx1 && redgrp->singllinks[m]->p1.y==cy1)&&(redgrp->singllinks[m]->p2.x==cx2 && redgrp->singllinks[m]->p2.y==cy2))||((redgrp->singllinks[m]->p2.x==cx1 && redgrp->singllinks[m]->p2.y==cy1)&&(redgrp->singllinks[m]->p1.x==cx2 && redgrp->singllinks[m]->p1.y==cy2))){ 
+                    printf("parallel exception %d found w/ red: allowed.\n",n/2); //debug
+                    // first=; if this first is more then take it
+                    if(firstd[d]>first){
+                        first=firstd[d];
+                    }
+                    // last=; if this last is less take it
+                    if(lastd[d]<last){
+                        last=lastd[d];
+                    }
+                }
+            }
+            }
+            for(int d=0; d<=4; d++){
+                int n=2*d-4;
+                if(n==0){
+                    continue;
+                }
+                int cx1=x1;
+                int cy1=y1+n;
+                int cx2=x2;
+                int cy2=y2+n;
+            for(int m=0; m<blugrp->nsl; m++){
+                if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
+                    printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
+                    // first=; if this first is more then take it
+                    if(firstd[d]>first){
+                        first=firstd[d];
+                    }
+                    // last=; if this last is less take it
+                    if(lastd[d]<last){
+                        last=lastd[d];
+                    }
+                }
+            }
+            }
+            for(int j=first; j<=last; j++){
+                //already checked parallel cases now
                 //condition that checks if it is overlapping any of the current links/pegs
                 if(board[cx][(y1)+j]!=0){
                     flagn=j;
                     flag=1;
                     printf("collision detected\n"); //debug
-                    break;
+                    int except=0;
+                    //check for exception cases
+                    if(board[cx][(y1)+flagn]==-5){
+                        bigflag=1;
+                        break;
+                    }
+                    else if(board[cx][(y1)+flagn]==5){
+                        for(int i=0; i<redgrp->nsl; i++){
+                            if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
+                                for(int h=0; h<=4; h++){
+                                    if(redgrp->singllinks[i]->middle[h].x==cx && redgrp->singllinks[i]->middle[h].y==(y1)+flagn){
+                                        except=1;
+                                        break;
+                                    }
+                                }
+                            }    
+                        }
+                        if(except!=1){
+                            printf("denied: first failed found\n"); //debug
+                            bigflag=1;
+                            break;
+                        }
+                        else{
+                            printf("exception: collision allowed\n"); //debug
+                        }
+                    }
+                    else{
+                        bigflag=1;
+                    }
+                    
                 }
             }
-            if(flag && board[cx][(y1)+flagn]==5){
-                //check for exception cases
-                //need to add extra condition in above if condition to differentiate cases where its own link intersection and other link intersection
-                for(int i=0; i<redgrp->nsl; i++){
-                    if((redgrp->singllinks[i]->p1.x==x2 && redgrp->singllinks[i]->p1.y==y2) || (redgrp->singllinks[i]->p2.x==x2 && redgrp->singllinks[i]->p2.y==y2) || (redgrp->singllinks[i]->p1.x==x1 && redgrp->singllinks[i]->p1.y==y1) || (redgrp->singllinks[i]->p2.x==x1 && redgrp->singllinks[i]->p2.y==y1)){
-                        for(int j=0; j<=4; j++){
-                            if(redgrp->singllinks[i]->middle[j].x==cx && redgrp->singllinks[i]->middle[j].y==(y1)+flagn){
-                                except=1;
-                                break;
-                            }
-                        }
-                    }    
-                }    
-                if(except){printf("exception: collision allowed\n");} //debug
-            }
-            if(flag==0 || (flag==1 && except==1)){
+            if(flag==0 || (flag==1 && bigflag==0)){
                 peg arr[5];
                 for(int j=0; j<=4; j++){
                     board[cx][(y1)+j]=5;

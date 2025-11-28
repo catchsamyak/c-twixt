@@ -4,9 +4,9 @@
 #include "link.h"
 #include "logic.h"
 
-//[issues to be fixed in phase 2]
-//if you input letters it goes in infinite loop
-//need to check for every intersection -not break at first exception in link collission
+//[issues]
+//need to check for every intersection -not break at first exception in link collission and also add parallel exception for all other cases
+//put numbers both above and below board
 
 int main(){
     //1 is red
@@ -37,7 +37,18 @@ int main(){
             int cont=0;
             while(cont!=1){
                 printf("\n\033[31mred: \033[0m");
-                scanf("%d %d",&ix, &iy);
+                int valid=0;
+                while(!valid){
+                    if(scanf("%d %d",&ix, &iy)!=2){
+                        printf("invalid input, enter integers only in the format <x> <y>.\n\033[31mred: \033[0m");
+                        while(getchar()!='\n'){
+                            continue;
+                        }
+                    }
+                    else{
+                        valid=1;
+                    }
+                }
                 int x=2*ix-2;
                 int y=2*iy-2;
                 if(ix<1 || ix>24 || iy<1 || iy>24){
@@ -70,7 +81,18 @@ int main(){
             int cont=0;
             while(cont!=1){
                 printf("\n\033[34mblue: \033[0m");
-                scanf("%d %d",&ix, &iy);
+                int valid=0;
+                while(!valid){
+                    if(scanf("%d %d",&ix, &iy)!=2){
+                        printf("invalid input, enter integers only in the format <x> <y>.\n\033[34mblue: \033[0m");
+                        while(getchar()!='\n'){
+                            continue;
+                        }
+                    }
+                    else{
+                        valid=1;
+                    }
+                }
                 int x=2*ix-2;
                 int y=2*iy-2;
                 if(ix<1 || ix>24 || iy<1 || iy>24){
