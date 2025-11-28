@@ -5,7 +5,6 @@
 #include "logic.h"
 
 //[todo]
-//need to check for every intersection -not break at first exception in link collission and also add parallel exception for all other cases
 //test extensively after which stop printing debug prints
 
 int main(){
