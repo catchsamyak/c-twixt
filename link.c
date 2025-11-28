@@ -382,7 +382,56 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
             //vertical right down link
             printf("case: vrd\n"); //debug
             cx = (x1)+1;
-            for(int j=0; j<=4; j++){
+            int first=0;
+            int last=4;
+            for(int d=0; d<=4; d++){
+                int n=2*d-4;
+                if(n==0){
+                    continue;
+                }
+                int cx1=x1;
+                int cy1=y1+n;
+                int cx2=x2;
+                int cy2=y2+n;
+            for(int m=0; m<redgrp->nsl; m++){
+                if(((redgrp->singllinks[m]->p1.x==cx1 && redgrp->singllinks[m]->p1.y==cy1)&&(redgrp->singllinks[m]->p2.x==cx2 && redgrp->singllinks[m]->p2.y==cy2))||((redgrp->singllinks[m]->p2.x==cx1 && redgrp->singllinks[m]->p2.y==cy1)&&(redgrp->singllinks[m]->p1.x==cx2 && redgrp->singllinks[m]->p1.y==cy2))){ 
+                    printf("parallel exception %d found w/ red: allowed.\n",n/2); //debug
+                    // first=; if this first is more then take it
+                    if(firstd[d]>first){
+                        first=firstd[d];
+                    }
+                    // last=; if this last is less take it
+                    if(lastd[d]<last){
+                        last=lastd[d];
+                    }
+                }
+            }
+            }
+            for(int d=0; d<=4; d++){
+                int n=2*d-4;
+                if(n==0){
+                    continue;
+                }
+                int cx1=x1;
+                int cy1=y1+n;
+                int cx2=x2;
+                int cy2=y2+n;
+            for(int m=0; m<blugrp->nsl; m++){
+                if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
+                    printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
+                    // first=; if this first is more then take it
+                    if(firstd[d]>first){
+                        first=firstd[d];
+                    }
+                    // last=; if this last is less take it
+                    if(lastd[d]<last){
+                        last=lastd[d];
+                    }
+                }
+            }
+            }
+            for(int j=first; j<=last; j++){
+                //already checked parallel cases now
                 //condition that checks if it is overlapping any of the current links/pegs
                 if(board[cx][(y1)+j]!=0){
                     flagn=j;
