@@ -46,8 +46,8 @@ int main(){
     printf("For this version of the game, all possible links are automatically made and are permanent (cannot be removed) for the entire course of the game.\n");
     printf("The first player to make a continuous chain of linked pieces connecting their two sides wins. If neither side can achieve this, the game is a draw.\n");
     printf("\n");
-    printf("In order to place a peg on your turn please enter the coordinates of the location at which you would to place your peg in the format <x> <y>,\n");
-    printf("where <x> and <y> are the x-coordinate and y-coordinate respectively.\n");
+    printf("In order to place a peg on your turn please enter the coordinates of the location at which you would like to place your peg in the format <x> <y>,\n");
+    printf("where <x> and <y> are the x-coordinate and y-coordinate respectively. Indexing starts from 1 as shown with the board below.\n");
     printf("\n");
     printf("The game will automatically end once a player has won. If you wish to EXIT before that manually: type ^C (ctrl+C) on your keyboard.\n");
     printf("Enjoy playing!\n");
