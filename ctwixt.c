@@ -20,10 +20,14 @@ int main(){
     linkgroup* redgrp = malloc(sizeof(linkgroup));
     redgrp->ncl=0;
     redgrp->nsl=0;
+    redgrp->singllinks=NULL;
+    redgrp->comblinks=NULL;
 
     linkgroup* blugrp = malloc(sizeof(linkgroup));
     blugrp->ncl=0;
     blugrp->nsl=0;
+    blugrp->singllinks=NULL;
+    blugrp->comblinks=NULL;
 
     //initial information display
     printf("\n");

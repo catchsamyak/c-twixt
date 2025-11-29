@@ -438,10 +438,10 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(n==0){
                     continue;
                 }
-                int cx1=x1;
-                int cy1=y1+n;
-                int cx2=x2;
-                int cy2=y2+n;
+                int cx1=x1+n;
+                int cy1=y1;
+                int cx2=x2+n;
+                int cy2=y2;
             for(int m=0; m<blugrp->nsl; m++){
                 if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
                     printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
@@ -532,10 +532,10 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(n==0){
                     continue;
                 }
-                int cx1=x1;
-                int cy1=y1+n;
-                int cx2=x2;
-                int cy2=y2+n;
+                int cx1=x1+n;
+                int cy1=y1;
+                int cx2=x2+n;
+                int cy2=y2;
             for(int m=0; m<blugrp->nsl; m++){
                 if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
                     printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
@@ -626,10 +626,10 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(n==0){
                     continue;
                 }
-                int cx1=x1;
-                int cy1=y1+n;
-                int cx2=x2;
-                int cy2=y2+n;
+                int cx1=x1+n;
+                int cy1=y1;
+                int cx2=x2+n;
+                int cy2=y2;
             for(int m=0; m<blugrp->nsl; m++){
                 if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
                     printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
@@ -720,10 +720,10 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(n==0){
                     continue;
                 }
-                int cx1=x1;
-                int cy1=y1+n;
-                int cx2=x2;
-                int cy2=y2+n;
+                int cx1=x1+n;
+                int cy1=y1;
+                int cx2=x2+n;
+                int cy2=y2;
             for(int m=0; m<blugrp->nsl; m++){
                 if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
                     printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
@@ -1193,10 +1193,10 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(n==0){
                     continue;
                 }
-                int cx1=x1;
-                int cy1=y1+n;
-                int cx2=x2;
-                int cy2=y2+n;
+                int cx1=x1+n;
+                int cy1=y1;
+                int cx2=x2+n;
+                int cy2=y2;
             for(int m=0; m<blugrp->nsl; m++){
                 if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
                     printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
@@ -1287,10 +1287,10 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(n==0){
                     continue;
                 }
-                int cx1=x1;
-                int cy1=y1+n;
-                int cx2=x2;
-                int cy2=y2+n;
+                int cx1=x1+n;
+                int cy1=y1;
+                int cx2=x2+n;
+                int cy2=y2;
             for(int m=0; m<blugrp->nsl; m++){
                 if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
                     printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
@@ -1381,10 +1381,10 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(n==0){
                     continue;
                 }
-                int cx1=x1;
-                int cy1=y1+n;
-                int cx2=x2;
-                int cy2=y2+n;
+                int cx1=x1+n;
+                int cy1=y1;
+                int cx2=x2+n;
+                int cy2=y2;
             for(int m=0; m<blugrp->nsl; m++){
                 if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
                     printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
@@ -1475,10 +1475,10 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(n==0){
                     continue;
                 }
-                int cx1=x1;
-                int cy1=y1+n;
-                int cx2=x2;
-                int cy2=y2+n;
+                int cx1=x1+n;
+                int cy1=y1;
+                int cx2=x2+n;
+                int cy2=y2;
             for(int m=0; m<blugrp->nsl; m++){
                 if(((blugrp->singllinks[m]->p1.x==cx1 && blugrp->singllinks[m]->p1.y==cy1)&&(blugrp->singllinks[m]->p2.x==cx2 && blugrp->singllinks[m]->p2.y==cy2))||((blugrp->singllinks[m]->p2.x==cx1 && blugrp->singllinks[m]->p2.y==cy1)&&(blugrp->singllinks[m]->p1.x==cx2 && blugrp->singllinks[m]->p1.y==cy2))){ 
                     printf("parallel exception %d found w/ blue: allowed.\n",n/2); //debug
