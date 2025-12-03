@@ -12,11 +12,6 @@ typedef struct singllink{
     peg middle[5];
 }singllink;
 
-typedef struct comblink{
-    peg p1;
-    peg p2;
-}comblink;
-
 typedef struct linkgroup{
     singllink** singllinks;
     int nsl;
