@@ -25,7 +25,7 @@ void parallelcheck(linkgroup* grp, int x1, int y1, int x2, int y2, int constx, i
         }
         for(int m=0; m<grp->nsl; m++){
             if(((grp->singllinks[m]->p1.x==cx1 && grp->singllinks[m]->p1.y==cy1)&&(grp->singllinks[m]->p2.x==cx2 && grp->singllinks[m]->p2.y==cy2))||((grp->singllinks[m]->p2.x==cx1 && grp->singllinks[m]->p2.y==cy1)&&(grp->singllinks[m]->p1.x==cx2 && grp->singllinks[m]->p1.y==cy2))){ 
-                printf("parallel exception %d found: allowed.\n",n/2); //debug
+                // printf("parallel exception %d found: allowed.\n",n/2); //debug
                 // first=; if this first is more then take it
                 if(firstv[d]>*first){
                     *first=firstv[d];
@@ -50,7 +50,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
     int current=board[x1][y1];
 
     if(current==0 || board[x2][y2]!=current){
-        printf("no link possible\n"); //debug
+        // printf("no link possible\n"); //debug
         return;
     }
 
@@ -69,7 +69,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
 
         if((x2)-(x1)==2 && (y2)-(y1)==4){
             //vertical right down link
-            printf("case: vrd\n"); //debug
+            // printf("case: vrd\n"); //debug
             cx = (x1)+1;
             int first=0;
             int last=4;
@@ -85,7 +85,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(board[cx][(y1)+j]!=0){
                     flagn=j;
                     flag=1;
-                    printf("collision detected\n"); //debug
+                    // printf("collision detected\n"); //debug
                     int except=0;
                     //check for exception cases
                     if(board[cx][(y1)+flagn]==notcurrentlink){
@@ -104,12 +104,12 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                             }    
                         }
                         if(except!=1){
-                            printf("denied: first failed found\n"); //debug
+                            // printf("denied: first failed found\n"); //debug
                             bigflag=1;
                             break;
                         }
                         else{
-                            printf("exception: collision allowed\n"); //debug
+                            // printf("exception: collision allowed\n"); //debug
                         }
                     }
                     else{
@@ -132,7 +132,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
 
         else if((x2)-(x1)==-2 && (y2)-(y1)==4){
             //vertical left down link
-            printf("case: vld\n"); //debug
+            // printf("case: vld\n"); //debug
             cx = (x1)-1;
             int first=0;
             int last=4;
@@ -144,7 +144,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(board[cx][(y1)+j]!=0){
                     flagn=j;
                     flag=1;
-                    printf("collision detected\n"); //debug
+                    // printf("collision detected\n"); //debug
                     int except=0;
                     if(board[cx][(y1)+flagn]==notcurrentlink){
                         bigflag=1;
@@ -162,12 +162,12 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                     }    
                     }    
                     if(except!=1){
-                        printf("denied: first failed found\n"); //debug
+                        // printf("denied: first failed found\n"); //debug
                         bigflag=1;
                         break;
                     }
                     else{
-                        printf("exception: collision allowed\n"); //debug
+                        // printf("exception: collision allowed\n"); //debug
                     }                    
                     }
                     else{
@@ -188,7 +188,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
 
         else if((x2)-(x1)==2 && (y2)-(y1)==-4){
             //vertical right up link
-            printf("case: vru\n"); //debug
+            // printf("case: vru\n"); //debug
             cx = (x1)+1;
             int first=0;
             int last=4;
@@ -200,7 +200,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(board[cx][(y1)-j]!=0){
                     flagn=j;
                     flag=1;
-                    printf("collision detected\n"); //debug
+                    // printf("collision detected\n"); //debug
                     int except=0;
                     if(board[cx][(y1)-flagn]==notcurrentlink){
                         bigflag=1;
@@ -218,12 +218,12 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                     }    
                     }    
                     if(except!=1){
-                        printf("denied: first failed found\n"); //debug
+                        // printf("denied: first failed found\n"); //debug
                         bigflag=1;
                         break;
                     }
                     else{
-                        printf("exception: collision allowed\n"); //debug
+                        // printf("exception: collision allowed\n"); //debug
                     }                    
                     }
                     else{
@@ -244,7 +244,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
 
         else if((x2)-(x1)==-2 && (y2)-(y1)==-4){
             //vertical left up link
-            printf("case: vlu\n"); //debug
+            // printf("case: vlu\n"); //debug
             cx = (x1)-1;
             int first=0;
             int last=4;
@@ -256,7 +256,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(board[cx][(y1)-j]!=0){
                     flagn=j;
                     flag=1;
-                    printf("collision detected\n"); //debug
+                    // printf("collision detected\n"); //debug
                     int except=0;
                     if(board[cx][(y1)-flagn]==notcurrentlink){
                         bigflag=1;
@@ -274,12 +274,12 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                     }    
                     }    
                     if(except!=1){
-                        printf("denied: first failed found\n"); //debug
+                        // printf("denied: first failed found\n"); //debug
                         bigflag=1;
                         break;
                     }
                     else{
-                        printf("exception: collision allowed\n"); //debug
+                        // printf("exception: collision allowed\n"); //debug
                     }                    
                     }
                     else{
@@ -300,7 +300,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
 
         else if((x2)-(x1)==4 && (y2)-(y1)==2){
             //horizontal right down link
-            printf("case: hrd\n"); //debug
+            // printf("case: hrd\n"); //debug
             cy = (y1)+1;
             int first=0;
             int last=4;
@@ -312,7 +312,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(board[(x1)+j][cy]!=0){
                     flagn=j;
                     flag=1;
-                    printf("collision detected\n"); //debug
+                    // printf("collision detected\n"); //debug
                     int except=0;
                     if(board[(x1)+flagn][cy]==notcurrentlink){
                         bigflag=1;
@@ -330,12 +330,12 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                     }    
                     }    
                     if(except!=1){
-                        printf("denied: first failed found\n"); //debug
+                        // printf("denied: first failed found\n"); //debug
                         bigflag=1;
                         break;
                     }
                     else{
-                        printf("exception: collision allowed\n"); //debug
+                        // printf("exception: collision allowed\n"); //debug
                     }                    
                     }
                     else{
@@ -356,7 +356,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
 
         else if((x2)-(x1)==-4 && (y2)-(y1)==2){
             //horizontal left down link
-            printf("case: hld\n"); //debug
+            // printf("case: hld\n"); //debug
             cy = (y1)+1;
             int first=0;
             int last=4;
@@ -368,7 +368,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(board[(x1)-j][cy]!=0){
                     flagn=j;
                     flag=1;
-                    printf("collision detected\n"); //debug
+                    // printf("collision detected\n"); //debug
                     int except=0;
                     if(board[(x1)-flagn][cy]==notcurrentlink){
                         bigflag=1;
@@ -386,12 +386,12 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                     }    
                     }    
                     if(except!=1){
-                        printf("denied: first failed found\n"); //debug
+                        // printf("denied: first failed found\n"); //debug
                         bigflag=1;
                         break;
                     }
                     else{
-                        printf("exception: collision allowed\n"); //debug
+                        // printf("exception: collision allowed\n"); //debug
                     }                    
                     }
                     else{
@@ -412,7 +412,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
 
         else if((x2)-(x1)==4 && (y2)-(y1)==-2){
             //horizontal right up link
-            printf("case: hru\n"); //debug
+            // printf("case: hru\n"); //debug
             cy = (y1)-1;
             int first=0;
             int last=4;
@@ -424,7 +424,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(board[(x1)+j][cy]!=0){
                     flagn=j;
                     flag=1;
-                    printf("collision detected\n"); //debug
+                    // printf("collision detected\n"); //debug
                     int except=0;
                     if(board[(x1)+flagn][cy]==notcurrentlink){
                         bigflag=1;
@@ -442,12 +442,12 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                     }    
                     }    
                     if(except!=1){
-                        printf("denied: first failed found\n"); //debug
+                        // printf("denied: first failed found\n"); //debug
                         bigflag=1;
                         break;
                     }
                     else{
-                        printf("exception: collision allowed\n"); //debug
+                        // printf("exception: collision allowed\n"); //debug
                     }                    
                     }
                     else{
@@ -468,7 +468,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
 
         else if((x2)-(x1)==-4 && (y2)-(y1)==-2){
             //horizontal left up link
-            printf("case: hlu\n"); //debug
+            // printf("case: hlu\n"); //debug
             cy = (y1)-1;
             int first=0;
             int last=4;
@@ -480,7 +480,7 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                 if(board[(x1)-j][cy]!=0){
                     flagn=j;
                     flag=1;
-                    printf("collision detected\n"); //debug
+                    // printf("collision detected\n"); //debug
                     int except=0;
                     if(board[(x1)-flagn][cy]==notcurrentlink){
                         bigflag=1;
@@ -498,12 +498,12 @@ void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redg
                     }    
                     }    
                     if(except!=1){
-                        printf("denied: first failed found\n"); //debug
+                        // printf("denied: first failed found\n"); //debug
                         bigflag=1;
                         break;
                     }
                     else{
-                        printf("exception: collision allowed\n"); //debug
+                        // printf("exception: collision allowed\n"); //debug
                     }                    
                     }
                     else{

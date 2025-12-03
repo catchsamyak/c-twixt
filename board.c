@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//for debugging
 void printboardvalues(int board[47][47]){
     for(int j=0; j<47; j++){
         for(int i=0; i<47; i++){

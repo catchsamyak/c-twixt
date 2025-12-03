@@ -1,7 +1,8 @@
 # C-TWIXT
   
 C-TWIXT  
-  
+TwixT made using only C (programming language)  
+
 NAME: Samyak Shah  
 ROLL NUMBER: 2025101020  
   

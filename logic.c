@@ -12,105 +12,6 @@ void copyarray(peg src[5], peg dest[5]){
 }
 
 void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp, peg arr[5]){
-
-    //checking if can comb with a comb link
-    int temp=grp->ncl;
-    for(int i=0; i<temp; i++){
-        if(grp->comblinks[i]->p1.x==x1 && grp->comblinks[i]->p1.y==y1){
-            comblink* new = malloc(sizeof(comblink));
-            new->p1.x=grp->comblinks[i]->p2.x;
-            new->p1.y=grp->comblinks[i]->p2.y;
-            new->p2.x=x2;
-            new->p2.y=y2;
-            (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-            grp->comblinks[(grp->ncl)-1]=new;
-            printf("combined to a comb link\n"); //debug
-        }
-        else if(grp->comblinks[i]->p1.x==x2 && grp->comblinks[i]->p1.y==y2){
-            comblink* new = malloc(sizeof(comblink));
-            new->p1.x=grp->comblinks[i]->p2.x;
-            new->p1.y=grp->comblinks[i]->p2.y;
-            new->p2.x=x1;
-            new->p2.y=y1;
-            (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-            grp->comblinks[(grp->ncl)-1]=new;
-            printf("combined to a comb link\n"); //debug
-        }
-        else if(grp->comblinks[i]->p2.x==x1 && grp->comblinks[i]->p2.y==y1){
-            comblink* new = malloc(sizeof(comblink));
-            new->p1.x=grp->comblinks[i]->p1.x;
-            new->p1.y=grp->comblinks[i]->p1.y;
-            new->p2.x=x2;
-            new->p2.y=y2;
-            (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-            grp->comblinks[(grp->ncl)-1]=new;
-            printf("combined to a comb link\n"); //debug
-        }
-        else if(grp->comblinks[i]->p2.x==x2 && grp->comblinks[i]->p2.y==y2){
-            comblink* new = malloc(sizeof(comblink));
-            new->p1.x=grp->comblinks[i]->p1.x;
-            new->p1.y=grp->comblinks[i]->p1.y;
-            new->p2.x=x1;
-            new->p2.y=y1;
-            (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-            grp->comblinks[(grp->ncl)-1]=new;
-            printf("combined to a comb link\n"); //debug
-        }  
-    }
-
-    //checking if can comb with a singl link
-    for(int i=0; i<grp->nsl; i++){
-        if(grp->singllinks[i]->p1.x==x1 && grp->singllinks[i]->p1.y==y1){
-            comblink* new = malloc(sizeof(comblink));
-            new->p1.x=grp->singllinks[i]->p2.x;
-            new->p1.y=grp->singllinks[i]->p2.y;
-            new->p2.x=x2;
-            new->p2.y=y2;
-            (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-            grp->comblinks[(grp->ncl)-1]=new;
-            printf("combined to a singl link\n"); //debug
-        }
-        else if(grp->singllinks[i]->p1.x==x2 && grp->singllinks[i]->p1.y==y2){
-            comblink* new = malloc(sizeof(comblink));
-            new->p1.x=grp->singllinks[i]->p2.x;
-            new->p1.y=grp->singllinks[i]->p2.y;
-            new->p2.x=x1;
-            new->p2.y=y1;
-            (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-            grp->comblinks[(grp->ncl)-1]=new;
-            printf("combined to a singl link\n"); //debug
-        }
-        else if(grp->singllinks[i]->p2.x==x1 && grp->singllinks[i]->p2.y==y1){
-            comblink* new = malloc(sizeof(comblink));
-            new->p1.x=grp->singllinks[i]->p1.x;
-            new->p1.y=grp->singllinks[i]->p1.y;
-            new->p2.x=x2;
-            new->p2.y=y2;
-            (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-            grp->comblinks[(grp->ncl)-1]=new;
-            printf("combined to a singl link\n"); //debug
-        }
-        else if(grp->singllinks[i]->p2.x==x2 && grp->singllinks[i]->p2.y==y2){
-            comblink* new = malloc(sizeof(comblink));
-            new->p1.x=grp->singllinks[i]->p1.x;
-            new->p1.y=grp->singllinks[i]->p1.y;
-            new->p2.x=x1;
-            new->p2.y=y1;
-            (grp->ncl)++;
-            grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-            grp->comblinks[(grp->ncl)-1]=new;
-            printf("combined to a singl link\n"); //debug
-        }   
-    }
-
-    // need to keep original links also, and then add combined ones, if dont add original link then can miss cases
     //add the link to singl links
     singllink* new = malloc(sizeof(singllink));
     new->p1.x=x1;
@@ -122,277 +23,90 @@ void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp, peg arr[5]){
     grp->singllinks = realloc(grp->singllinks,(grp->nsl)*sizeof(singllink*));
     grp->singllinks[(grp->nsl)-1] = new;
     printf("added link to singl links\n");
-
     return;
 }
 
-void checkwin(int playr, int* end, linkgroup* redgrp, linkgroup* blugrp){
+int checkwinpeg(int playr, peg p, int notagain[47][47], int memo[47][47], linkgroup* grp){
+    if(memo[p.x][p.y]!=-1){
+        return memo[p.x][p.y];
+    }
+    if(playr==1 && p.y==46){
+        memo[p.x][p.y]=1;
+        return memo[p.x][p.y];
+    }
+    if(playr==-1 && p.x==46){
+        memo[p.x][p.y]=1;
+        return memo[p.x][p.y];
+    }
+    notagain[p.x][p.y]=1;
+    for(int i=0; i<grp->nsl; i++){
+        if((p.x==grp->singllinks[i]->p1.x && p.y==grp->singllinks[i]->p1.y) && notagain[grp->singllinks[i]->p2.x][grp->singllinks[i]->p2.y]!=1){
+            if(checkwinpeg(playr, grp->singllinks[i]->p2, notagain, memo, grp)){
+                memo[p.x][p.y]=1;
+                return memo[p.x][p.y];
+            }
+        }
+        else if((p.x==grp->singllinks[i]->p2.x && p.y==grp->singllinks[i]->p2.y) && notagain[grp->singllinks[i]->p1.x][grp->singllinks[i]->p1.y]!=1){
+            if(checkwinpeg(playr, grp->singllinks[i]->p1, notagain, memo, grp)){
+                memo[p.x][p.y]=1;
+                return memo[p.x][p.y];
+            }
+        }
+    }
+    memo[p.x][p.y]=0;
+    return memo[p.x][p.y];
+}
 
+void resetarr(int notagain[47][47]){
+    for (int i=0; i<47; i++){
+        for (int j=0; j<47; j++){
+            notagain[i][j] = 0;
+        }
+    } 
+    return;
+}
+
+void checkwin(int board[47][47], int playr, int* end, linkgroup* redgrp, linkgroup* blugrp){
+    int memo[47][47];
+    int notagain[47][47];
+    for (int i=0; i<47; i++){
+        for (int j=0; j<47; j++){
+            memo[i][j] = -1;
+        }
+    }
     if(playr==1){
-        //need to still combine combinable links in comblinks
-        linkgroup* grp = redgrp;
-        int happened;
-        do{
-            happened=0;
-            int temp=grp->ncl;
-            for(int f=0; f<temp; f++){
-                int x1=grp->comblinks[f]->p1.x;
-                int y1=grp->comblinks[f]->p1.y;
-                int y2=grp->comblinks[f]->p2.y;
-                int x2=grp->comblinks[f]->p2.x;
-            for(int i=f+1; i<temp; i++){
-                if(grp->comblinks[i]->p1.x==x1 && grp->comblinks[i]->p1.y==y1){
-                    int alreadythere=0;
-                    for(int k=0; k<grp->ncl; k++){
-                        int cx1=grp->comblinks[i]->p2.x;
-                        int cy1=grp->comblinks[i]->p2.y;
-                        int cx2=x2;
-                        int cy2=y2;
-                        if(((grp->comblinks[k]->p1.x==cx1 && grp->comblinks[k]->p1.y==cy1)&&(grp->comblinks[k]->p2.x==cx2 && grp->comblinks[k]->p2.y==cy2))||((grp->comblinks[k]->p2.x==cx1 && grp->comblinks[k]->p2.y==cy1)&&(grp->comblinks[k]->p1.x==cx2 && grp->comblinks[k]->p1.y==cy2))){
-                            alreadythere=1;
-                            break;
-                        }    
-                    }
-                    if(!alreadythere){
-                        comblink* new = malloc(sizeof(comblink));
-                        new->p1.x=grp->comblinks[i]->p2.x;
-                        new->p1.y=grp->comblinks[i]->p2.y;
-                        new->p2.x=x2;
-                        new->p2.y=y2;
-                        (grp->ncl)++;
-                        grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-                        grp->comblinks[(grp->ncl)-1]=new;
-                        happened++;
-                        printf("combined internal comb link\n"); //debug
-                    }
+        for(int x=2; x<=44; x+=2){
+            resetarr(notagain);
+            if(board[x][0]==playr){
+                peg p={x,0};
+                if(checkwinpeg(playr,p,notagain,memo,redgrp)){
+                    *end=1;
+                    return;
                 }
-                else if(grp->comblinks[i]->p1.x==x2 && grp->comblinks[i]->p1.y==y2){
-                    int alreadythere=0;
-                    for(int k=0; k<grp->ncl; k++){
-                        int cx1=grp->comblinks[i]->p2.x;
-                        int cy1=grp->comblinks[i]->p2.y;
-                        int cx2=x1;
-                        int cy2=y1;
-                        if(((grp->comblinks[k]->p1.x==cx1 && grp->comblinks[k]->p1.y==cy1)&&(grp->comblinks[k]->p2.x==cx2 && grp->comblinks[k]->p2.y==cy2))||((grp->comblinks[k]->p2.x==cx1 && grp->comblinks[k]->p2.y==cy1)&&(grp->comblinks[k]->p1.x==cx2 && grp->comblinks[k]->p1.y==cy2))){
-                            alreadythere=1;
-                            break;
-                        }    
-                    }
-                    if(!alreadythere){
-                    comblink* new = malloc(sizeof(comblink));
-                    new->p1.x=grp->comblinks[i]->p2.x;
-                    new->p1.y=grp->comblinks[i]->p2.y;
-                    new->p2.x=x1;
-                    new->p2.y=y1;
-                    (grp->ncl)++;
-                    grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-                    grp->comblinks[(grp->ncl)-1]=new;
-                    happened++;
-                    printf("combined internal comb link\n"); //debug
-                    }
-                }   
-                else if(grp->comblinks[i]->p2.x==x1 && grp->comblinks[i]->p2.y==y1){
-                    int alreadythere=0;
-                    for(int k=0; k<grp->ncl; k++){
-                        int cx1=grp->comblinks[i]->p1.x;
-                        int cy1=grp->comblinks[i]->p1.y;
-                        int cx2=x2;
-                        int cy2=y2;
-                        if(((grp->comblinks[k]->p1.x==cx1 && grp->comblinks[k]->p1.y==cy1)&&(grp->comblinks[k]->p2.x==cx2 && grp->comblinks[k]->p2.y==cy2))||((grp->comblinks[k]->p2.x==cx1 && grp->comblinks[k]->p2.y==cy1)&&(grp->comblinks[k]->p1.x==cx2 && grp->comblinks[k]->p1.y==cy2))){
-                            alreadythere=1;
-                            break;
-                        }    
-                    }
-                    if(!alreadythere){
-                    comblink* new = malloc(sizeof(comblink));
-                    new->p1.x=grp->comblinks[i]->p1.x;
-                    new->p1.y=grp->comblinks[i]->p1.y;
-                    new->p2.x=x2;
-                    new->p2.y=y2;
-                    (grp->ncl)++;
-                    grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-                    grp->comblinks[(grp->ncl)-1]=new;
-                    happened++;
-                    printf("combined internal comb link\n"); //debug
-                    }
-                }
-                else if(grp->comblinks[i]->p2.x==x2 && grp->comblinks[i]->p2.y==y2){
-                    int alreadythere=0;
-                    for(int k=0; k<grp->ncl; k++){
-                        int cx1=grp->comblinks[i]->p1.x;
-                        int cy1=grp->comblinks[i]->p1.y;
-                        int cx2=x1;
-                        int cy2=y1;
-                        if(((grp->comblinks[k]->p1.x==cx1 && grp->comblinks[k]->p1.y==cy1)&&(grp->comblinks[k]->p2.x==cx2 && grp->comblinks[k]->p2.y==cy2))||((grp->comblinks[k]->p2.x==cx1 && grp->comblinks[k]->p2.y==cy1)&&(grp->comblinks[k]->p1.x==cx2 && grp->comblinks[k]->p1.y==cy2))){
-                            alreadythere=1;
-                            break;
-                        }    
-                    }
-                    if(!alreadythere){
-                    comblink* new = malloc(sizeof(comblink));
-                    new->p1.x=grp->comblinks[i]->p1.x;
-                    new->p1.y=grp->comblinks[i]->p1.y;
-                    new->p2.x=x1;
-                    new->p2.y=y1;
-                    (grp->ncl)++;
-                    grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-                    grp->comblinks[(grp->ncl)-1]=new;
-                    happened++;
-                    printf("combined internal comb link\n"); //debug
-                    }
-                }
-            }
-            }
-        }while(happened>0);
-
-        for(int i=0; i<redgrp->ncl; i++){
-            if(abs((redgrp->comblinks[i]->p1.y)-(redgrp->comblinks[i]->p2.y))==46){
-                *end = 1;
-                break;
             }
         }
-        // if(*end==0){printf("red did not win\n");} //debug
     }
-
-    if(playr==-1){
-        linkgroup* grp = blugrp;
-        int happened;
-        do{
-            happened=0;
-            int temp=grp->ncl;
-            for(int f=0; f<temp; f++){
-                int x1=grp->comblinks[f]->p1.x;
-                int y1=grp->comblinks[f]->p1.y;
-                int y2=grp->comblinks[f]->p2.y;
-                int x2=grp->comblinks[f]->p2.x;
-            for(int i=f+1; i<temp; i++){
-                if(grp->comblinks[i]->p1.x==x1 && grp->comblinks[i]->p1.y==y1){
-                    int alreadythere=0;
-                    for(int k=0; k<grp->ncl; k++){
-                        int cx1=grp->comblinks[i]->p2.x;
-                        int cy1=grp->comblinks[i]->p2.y;
-                        int cx2=x2;
-                        int cy2=y2;
-                        if(((grp->comblinks[k]->p1.x==cx1 && grp->comblinks[k]->p1.y==cy1)&&(grp->comblinks[k]->p2.x==cx2 && grp->comblinks[k]->p2.y==cy2))||((grp->comblinks[k]->p2.x==cx1 && grp->comblinks[k]->p2.y==cy1)&&(grp->comblinks[k]->p1.x==cx2 && grp->comblinks[k]->p1.y==cy2))){
-                            alreadythere=1;
-                            break;
-                        }    
-                    }
-                    if(!alreadythere){
-                        comblink* new = malloc(sizeof(comblink));
-                        new->p1.x=grp->comblinks[i]->p2.x;
-                        new->p1.y=grp->comblinks[i]->p2.y;
-                        new->p2.x=x2;
-                        new->p2.y=y2;
-                        (grp->ncl)++;
-                        grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-                        grp->comblinks[(grp->ncl)-1]=new;
-                        happened++;
-                        printf("combined internal comb link\n"); //debug
-                    }
+    else{
+        for(int y=2; y<=44; y+=2){
+            resetarr(notagain);
+            if(board[0][y]==playr){
+                peg p={0,y};
+                if(checkwinpeg(playr,p,notagain,memo,blugrp)){
+                    *end=1;
+                    return;
                 }
-                else if(grp->comblinks[i]->p1.x==x2 && grp->comblinks[i]->p1.y==y2){
-                    int alreadythere=0;
-                    for(int k=0; k<grp->ncl; k++){
-                        int cx1=grp->comblinks[i]->p2.x;
-                        int cy1=grp->comblinks[i]->p2.y;
-                        int cx2=x1;
-                        int cy2=y1;
-                        if(((grp->comblinks[k]->p1.x==cx1 && grp->comblinks[k]->p1.y==cy1)&&(grp->comblinks[k]->p2.x==cx2 && grp->comblinks[k]->p2.y==cy2))||((grp->comblinks[k]->p2.x==cx1 && grp->comblinks[k]->p2.y==cy1)&&(grp->comblinks[k]->p1.x==cx2 && grp->comblinks[k]->p1.y==cy2))){
-                            alreadythere=1;
-                            break;
-                        }    
-                    }
-                    if(!alreadythere){
-                    comblink* new = malloc(sizeof(comblink));
-                    new->p1.x=grp->comblinks[i]->p2.x;
-                    new->p1.y=grp->comblinks[i]->p2.y;
-                    new->p2.x=x1;
-                    new->p2.y=y1;
-                    (grp->ncl)++;
-                    grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-                    grp->comblinks[(grp->ncl)-1]=new;
-                    happened++;
-                    printf("combined internal comb link\n"); //debug
-                    }
-                }   
-                else if(grp->comblinks[i]->p2.x==x1 && grp->comblinks[i]->p2.y==y1){
-                    int alreadythere=0;
-                    for(int k=0; k<grp->ncl; k++){
-                        int cx1=grp->comblinks[i]->p1.x;
-                        int cy1=grp->comblinks[i]->p1.y;
-                        int cx2=x2;
-                        int cy2=y2;
-                        if(((grp->comblinks[k]->p1.x==cx1 && grp->comblinks[k]->p1.y==cy1)&&(grp->comblinks[k]->p2.x==cx2 && grp->comblinks[k]->p2.y==cy2))||((grp->comblinks[k]->p2.x==cx1 && grp->comblinks[k]->p2.y==cy1)&&(grp->comblinks[k]->p1.x==cx2 && grp->comblinks[k]->p1.y==cy2))){
-                            alreadythere=1;
-                            break;
-                        }    
-                    }
-                    if(!alreadythere){
-                    comblink* new = malloc(sizeof(comblink));
-                    new->p1.x=grp->comblinks[i]->p1.x;
-                    new->p1.y=grp->comblinks[i]->p1.y;
-                    new->p2.x=x2;
-                    new->p2.y=y2;
-                    (grp->ncl)++;
-                    grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-                    grp->comblinks[(grp->ncl)-1]=new;
-                    happened++;
-                    printf("combined internal comb link\n"); //debug
-                    }
-                }
-                else if(grp->comblinks[i]->p2.x==x2 && grp->comblinks[i]->p2.y==y2){
-                    int alreadythere=0;
-                    for(int k=0; k<grp->ncl; k++){
-                        int cx1=grp->comblinks[i]->p1.x;
-                        int cy1=grp->comblinks[i]->p1.y;
-                        int cx2=x1;
-                        int cy2=y1;
-                        if(((grp->comblinks[k]->p1.x==cx1 && grp->comblinks[k]->p1.y==cy1)&&(grp->comblinks[k]->p2.x==cx2 && grp->comblinks[k]->p2.y==cy2))||((grp->comblinks[k]->p2.x==cx1 && grp->comblinks[k]->p2.y==cy1)&&(grp->comblinks[k]->p1.x==cx2 && grp->comblinks[k]->p1.y==cy2))){
-                            alreadythere=1;
-                            break;
-                        }    
-                    }
-                    if(!alreadythere){
-                    comblink* new = malloc(sizeof(comblink));
-                    new->p1.x=grp->comblinks[i]->p1.x;
-                    new->p1.y=grp->comblinks[i]->p1.y;
-                    new->p2.x=x1;
-                    new->p2.y=y1;
-                    (grp->ncl)++;
-                    grp->comblinks = realloc(grp->comblinks, (grp->ncl)*sizeof(comblink*));
-                    grp->comblinks[(grp->ncl)-1]=new;
-                    happened++;
-                    printf("combined internal comb link\n"); //debug
-                    }
-                }
-            }
-            }
-        }while(happened>0);
-
-        for(int i=0; i<blugrp->ncl; i++){
-            if(abs((blugrp->comblinks[i]->p1.x)-(blugrp->comblinks[i]->p2.x))==46){
-                *end = 1;
-                break;
             }
         }
-        // if(*end==0){printf("blue did not win\n");} //debug
     }
-
     return;
 }
 
 void freeall(linkgroup* redgrp, linkgroup* blugrp){
-
     //freeing redgrp
     for(int i=0; i<redgrp->nsl; i++){
         free(redgrp->singllinks[i]);
     }
     free(redgrp->singllinks);
-    for(int i=0; i<redgrp->ncl; i++){
-        free(redgrp->comblinks[i]);
-    }
-    free(redgrp->comblinks);
     free(redgrp);
 
     //freeing blugrp
@@ -400,11 +114,6 @@ void freeall(linkgroup* redgrp, linkgroup* blugrp){
         free(blugrp->singllinks[i]);
     }
     free(blugrp->singllinks);
-    for(int i=0; i<blugrp->ncl; i++){
-        free(blugrp->comblinks[i]);
-    }
-    free(blugrp->comblinks);
     free(blugrp);
-
     return;
 }

@@ -20,12 +20,10 @@ typedef struct comblink{
 typedef struct linkgroup{
     singllink** singllinks;
     int nsl;
-    comblink** comblinks;
-    int ncl;
 }linkgroup;
 
 void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp, peg arr[5]);
-void checkwin(int playr, int* end, linkgroup* redgrp, linkgroup* blugrp);
+void checkwin(int board[47][47], int playr, int* end, linkgroup* redgrp, linkgroup* blugrp);
 void freeall(linkgroup* redgrp, linkgroup* blugrp);
 
 #endif

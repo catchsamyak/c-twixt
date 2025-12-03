@@ -4,9 +4,6 @@
 #include "link.h"
 #include "logic.h"
 
-//[todo]
-//test extensively after which stop printing debug prints
-
 int main(){
     //1 is red
     //-1 is blue
@@ -18,16 +15,12 @@ int main(){
     int board[47][47]={0};
 
     linkgroup* redgrp = malloc(sizeof(linkgroup));
-    redgrp->ncl=0;
     redgrp->nsl=0;
     redgrp->singllinks=NULL;
-    redgrp->comblinks=NULL;
 
     linkgroup* blugrp = malloc(sizeof(linkgroup));
-    blugrp->ncl=0;
     blugrp->nsl=0;
     blugrp->singllinks=NULL;
-    blugrp->comblinks=NULL;
 
     //initial information display
     printf("\n");
@@ -48,7 +41,7 @@ int main(){
     printf("After placing a peg, you may link one or more pairs of pegs on the board which are all your own color.\n");
     printf("The links can only go between two pegs a knight's move away from each other and cannot cross another link; they block other links, most importantly the opponent's.\n");
     printf("For this version of the game, all possible links are automatically made and are permanent (cannot be removed) for the entire course of the game.\n");
-    printf("The first player to make a continuous chain of linked pieces connecting their two sides wins. If neither side can achieve this, the game is a draw.\n");
+    printf("The first player to make a continuous chain of linked pieces connecting their two sides wins.\n");
     printf("\n");
     printf("In order to place a peg on your turn please enter the coordinates of the location at which you would like to place your peg in the format <x> <y>, ex: 15 16,\n");
     printf("where <x> and <y> are the x-coordinate and y-coordinate respectively. Indexing starts from 1 as shown with the board below.\n");
@@ -104,7 +97,7 @@ int main(){
                     board[x][y]=playr;
                     autolink(board,x,y,redgrp,blugrp);
                     printboard(board);
-                    checkwin(playr, &end, redgrp, blugrp);
+                    checkwin(board, playr, &end, redgrp, blugrp);
                     cont=1;
                 }
             }
