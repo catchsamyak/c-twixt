@@ -50,7 +50,7 @@ int main(){
     printf("For this version of the game, all possible links are automatically made and are permanent (cannot be removed) for the entire course of the game.\n");
     printf("The first player to make a continuous chain of linked pieces connecting their two sides wins. If neither side can achieve this, the game is a draw.\n");
     printf("\n");
-    printf("In order to place a peg on your turn please enter the coordinates of the location at which you would like to place your peg in the format <x> <y>,\n");
+    printf("In order to place a peg on your turn please enter the coordinates of the location at which you would like to place your peg in the format <x> <y>, ex: 15 16,\n");
     printf("where <x> and <y> are the x-coordinate and y-coordinate respectively. Indexing starts from 1 as shown with the board below.\n");
     printf("\n");
     printf("The game will automatically end once a player has won. If you wish to EXIT before that manually: type ^C (ctrl+C) on your keyboard.\n");
@@ -61,14 +61,23 @@ int main(){
     int ix=0;
     int iy=0;
     while(end!=1){
-        if(playr==1){
             int cont=0;
             while(cont!=1){
-                printf("\n\033[31mred: \033[0m");
+                if(playr==1){
+                    printf("\n\033[31mred: \033[0m");
+                }
+                else{
+                    printf("\n\033[34mblue: \033[0m");
+                }
                 int valid=0;
                 while(!valid){
                     if(scanf("%d %d",&ix, &iy)!=2){
-                        printf("INVALID input, please enter integers only in the format <x> <y> (x-coordinate then y-coordinate).\n\033[31mred: \033[0m");
+                        if(playr==1){
+                            printf("INVALID input, please enter integers only in the format <x> <y> (x-coordinate then y-coordinate).\n\033[31mred: \033[0m");
+                        }
+                        else{
+                            printf("INVALID input, please enter integers only in the format <x> <y> (x-coordinate then y-coordinate).\n\033[34mblue: \033[0m");
+                        }
                         while(getchar()!='\n'){
                             continue;
                         }
@@ -82,73 +91,24 @@ int main(){
                 if(ix<1 || ix>24 || iy<1 || iy>24){
                     printf("INVALID input, that is out of the bounds of the board\n");
                 }
-                else if(ix==1||ix==24){
+                else if((playr==1) && (ix==1||ix==24)){
+                    printf("INVALID input, you cannot place a peg on your opponent's rows\n");
+                }
+                else if((playr==-1) && (iy==1||iy==24)){
                     printf("INVALID input, you cannot place a peg on your opponent's rows\n");
                 }
                 else if(board[x][y]!=0){
                     printf("INVALID input, a peg is already present there\n");
                 }
                 else{
-                    board[x][y]=1;
-                    makelink(board,x,y,x+2,y+4,redgrp,blugrp);
-                    makelink(board,x,y,x-2,y+4,redgrp,blugrp);
-                    makelink(board,x,y,x+2,y-4,redgrp,blugrp);
-                    makelink(board,x,y,x-2,y-4,redgrp,blugrp);
-                    makelink(board,x,y,x+4,y+2,redgrp,blugrp);
-                    makelink(board,x,y,x-4,y+2,redgrp,blugrp);
-                    makelink(board,x,y,x+4,y-2,redgrp,blugrp);
-                    makelink(board,x,y,x-4,y-2,redgrp,blugrp);
+                    board[x][y]=playr;
+                    autolink(board,x,y,redgrp,blugrp);
                     printboard(board);
                     checkwin(playr, &end, redgrp, blugrp);
                     cont=1;
                 }
             }
-            playr=-playr;
-        }   
-        else{
-            int cont=0;
-            while(cont!=1){
-                printf("\n\033[34mblue: \033[0m");
-                int valid=0;
-                while(!valid){
-                    if(scanf("%d %d",&ix, &iy)!=2){
-                        printf("INVALID input, please enter integers only in the format <x> <y> (x-coordinate then y-coordinate).\n\033[34mblue: \033[0m");
-                        while(getchar()!='\n'){
-                            continue;
-                        }
-                    }
-                    else{
-                        valid=1;
-                    }
-                }
-                int x=2*ix-2;
-                int y=2*iy-2;
-                if(ix<1 || ix>24 || iy<1 || iy>24){
-                    printf("INVALID input, that is out of the bounds of the board\n");
-                }
-                else if(iy==1||iy==24){
-                    printf("INVALID input, you cannot place a peg on your opponent's rows\n");
-                }
-                else if(board[x][y]!=0){
-                    printf("INVALID input, a peg is already present there\n");
-                }
-                else{
-                    board[x][y]=-1;
-                    makelink(board,x,y,x+2,y+4,redgrp,blugrp);
-                    makelink(board,x,y,x-2,y+4,redgrp,blugrp);
-                    makelink(board,x,y,x+2,y-4,redgrp,blugrp);
-                    makelink(board,x,y,x-2,y-4,redgrp,blugrp);
-                    makelink(board,x,y,x+4,y+2,redgrp,blugrp);
-                    makelink(board,x,y,x-4,y+2,redgrp,blugrp);
-                    makelink(board,x,y,x+4,y-2,redgrp,blugrp);
-                    makelink(board,x,y,x-4,y-2,redgrp,blugrp);
-                    printboard(board);
-                    checkwin(playr, &end, redgrp, blugrp);
-                    cont=1;
-                }
-            }
-            playr=-playr;
-        }
+        playr=-playr;
     }
 
     if(playr==-1){
