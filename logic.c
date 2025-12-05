@@ -22,7 +22,7 @@ void addlinktogrp(int x1, int y1, int x2, int y2, linkgroup* grp, peg arr[5]){
     (grp->nsl)++;
     grp->singllinks = realloc(grp->singllinks,(grp->nsl)*sizeof(singllink*));
     grp->singllinks[(grp->nsl)-1] = new;
-    printf("added link to singl links\n");
+    // printf("added link to singl links\n"); //debug
     return;
 }
 
