@@ -1,7 +1,7 @@
 # C-TWIXT
   
 C-TWIXT  
-TwixT made using only C (programming language)  
+TwixT made using only C (programming language) as part of my Monsoon 2025 Computer Programming course @ IIIT Hyderabad  
   
 HOW TO RUN:  
 make sure you are in the directory containing the game files  
@@ -16,4 +16,5 @@ board.h & board.c - contains information on how to print the board (converts the
 link.h & link.c - contains a function that checks whether a link is possible and valid and makes it if it is  
 logic.h & logic.c - keeps an account of the links made so far and contains instructions on how to detect a win  
 makefile - compiles all of these files together into a single exectuable named twixt  
+
 
