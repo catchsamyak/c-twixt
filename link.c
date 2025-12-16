@@ -43,7 +43,7 @@ void parallelcheck(linkgroup* grp, int x1, int y1, int x2, int y2, int constx, i
 void makelink(int board[47][47], int x1, int y1, int x2, int y2, linkgroup* redgrp, linkgroup* blugrp){
 
     if(x1<0 || x1>46 || y1<0 || y1>46 || x2<0 || x2>46 || y2<0 || y2>46){
-        printf("trying to link out of bound\n");
+        // printf("trying to link out of bound\n"); //debug
         return;
     }
 
